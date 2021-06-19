@@ -1,9 +1,9 @@
 {
-  "name": "@tmdt-buw/replay",
+  "name": "@tmdt-buw/gideon-replay",
   "version": "0.0.1",
   "license": "Apache-2.0",
-  "repository": "https://github.com/tmdt-buw/gideon.git",
-  "homepage": "https://github.com/tmdt-buw/gideon/tree/mouse/README.md",
+  "repository": "https://github.com/tmdt-buw/gideon-replay.git",
+  "homepage": "https://github.com/tmdt-buw/gideon-replay/README.md",
   "scripts": {
     "build": "tsc"
   },

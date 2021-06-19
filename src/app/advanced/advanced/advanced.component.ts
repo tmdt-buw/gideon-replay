@@ -73,7 +73,8 @@ export class AdvancedComponent extends TrackedComponent implements OnDestroy {
         type: 'line',
         smooth: true,
         symbolSize: this.symbolSize,
-        data: this.data
+        data: this.data,
+        animation: false
       }
     ]
   };

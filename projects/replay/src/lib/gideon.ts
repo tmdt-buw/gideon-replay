@@ -42,10 +42,11 @@ export class Gideon {
    * Replay given history on given html-element
    * @param element
    * @param history
+   * @param reset
    */
-  replay(element: any, history: LocationHistory) {
+  replay(element: any, history: LocationHistory, reset?: () => void) {
     this.stopReplay();
-    this._replay = new Replay(this, element, history);
+    this._replay = new Replay(this, element, history, reset);
     this.setRecording(false);
   }
 

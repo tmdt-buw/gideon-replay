@@ -17,6 +17,7 @@ export class Replay {
   private readonly history: LocationHistory;
   private readonly historyByTimeFrame: EventRecord[][];
   private readonly timeFrame = 10;
+  private readonly resetElement?: () => void;
 
   private readonly player: Player;
   private readonly cursor;
@@ -31,10 +32,11 @@ export class Replay {
     return this.history.events;
   }
 
-  constructor(gideon: Gideon, element: any, history: LocationHistory) {
+  constructor(gideon: Gideon, element: any, history: LocationHistory, resetElement?: () => void) {
     this.gideon = gideon;
     this.element = element;
     this.history = history;
+    this.resetElement = resetElement;
     this.historyByTimeFrame = this.history.events.historyByTimeframe(this.timeFrame);
     this.player = new Player(this);
     document.body.appendChild(this.player);
@@ -113,6 +115,7 @@ export class Replay {
   reset() {
     this.playTime.next(0);
     this.complete.next(false);
+    this.resetElement ? this.resetElement() : null;
     this.play();
   }
 
@@ -136,7 +139,7 @@ export class Replay {
    * @param time time to jump to
    * @param restore restore previous state?
    */
-  setPlayTime(time: number, restore?: boolean): void {
+  async setPlayTime(time: number, restore?: boolean): Promise<void> {
     const max = Math.ceil(this.events.playTime / 1000) * 1000;
     if (time < max) {
       if (this.complete.value) {
@@ -145,19 +148,16 @@ export class Replay {
       const idx = time / this.timeFrame;
       this.playTime.next(time);
       const frame = this.historyByTimeFrame[idx];
-      if (restore && frame.length < 1) {
-        let restored = false;
-        for (let i = idx; i > 0; i--) {
-          const prev = this.historyByTimeFrame[i];
-          if (prev.length > 0) {
-            this.replayRecords(prev);
-            restored = true;
-            break;
-          }
+      if (restore) {
+        this.hideCursor();
+        if (this.resetElement) {
+          this.resetElement();
+          // wait for animations etc
+          await this.delay(500);
         }
-        // there is no previous state (the cursor was not visible before)
-        if (!restored) {
-          this.hideCursor();
+        for (let i = 0; i < idx; i++) {
+          const records = this.historyByTimeFrame[i].filter(evt => evt.type !== 'mousemove');
+          this.replayRecords(records);
         }
       } else {
         this.replayRecords(frame);
@@ -294,6 +294,15 @@ export class Replay {
   private hideCursor(): void {
     this.cursor.top = '100%';
     this.cursor.left = '100%';
+  }
+
+  /**
+   * Wait for ms ms
+   * @param ms
+   * @private
+   */
+  private delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   /**

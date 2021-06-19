@@ -32,7 +32,7 @@ export class AppComponent {
     this.router.navigate([history.location.pathname]).then(() => {
       setTimeout(() => {
         this.trackedComponent.reset();
-        this.gideon.replay(this.trackedComponent.container.nativeElement, history);
+        this.gideon.replay(this.trackedComponent.container.nativeElement, history, () => this.trackedComponent.reset());
       });
     });
   }

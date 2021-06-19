@@ -34,6 +34,10 @@ Replay a history record on an HTML-element:
 
 ```Gideon.getInstance().getHistoryRecords(htmlElement, historyRecord);```
 
+Replay a history record on a stateful HTML-element with reset function to reset view:
+
+```Gideon.getInstance().getHistoryRecords(htmlElement, historyRecord, () => reset());```
+
 Stop current replay:
 
 ```Gideon.getInstance().stopReplay();```
