@@ -25,7 +25,7 @@
         </h3>
         <div fxLayout="column">
           <ng-container *ngFor="let record of gideon.getHistoryRecords(); let i = index">
-            <button (click)="replay(record)" nz-button nzType="dashed">{{ record.label }}</button>
+            <button (click)="replay(record)" nz-button nzType="dashed">{{ getLabel(record) }}</button>
             <div class="timeline" *ngIf="i < gideon.getHistoryRecords().length - 1">
               &nbsp;
             </div>

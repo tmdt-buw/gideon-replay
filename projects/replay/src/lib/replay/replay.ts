@@ -115,6 +115,10 @@ export class Replay {
   reset() {
     this.playTime.next(0);
     this.complete.next(false);
+    if (this.player.heatMapByPlayTime) {
+      this.showHeatmap(null, 1);
+    }
+    // tslint:disable-next-line:no-unused-expression
     this.resetElement ? this.resetElement() : null;
     this.play();
   }
@@ -160,7 +164,13 @@ export class Replay {
           this.replayRecords(records, true);
         }
       } else {
-        this.replayRecords(frame);
+        this.replayRecords(frame, false);
+        if (this.player.heatMapByPlayTime) {
+          const first = frame?.filter(event => event instanceof MouseEventRecord)[0] as MouseEventRecord;
+          if (first) {
+            this.heatmap.addData(first.x, first.y);
+          }
+        }
       }
     }
     if (time >= max) {
@@ -176,10 +186,14 @@ export class Replay {
    * @private
    */
   private onResize() {
-    if (this.heatmap) {
-      this.showHeatmap(this.heatmap.type);
-    }
     this.setPlayTime(this.playTime.value);
+    if (this.heatmap) {
+      if (this.player.heatMapByPlayTime) {
+        this.showHeatmap(null, this.playTime.getValue() || 1);
+      } else {
+        this.showHeatmap(this.heatmap.type);
+      }
+    }
   }
 
   /**
@@ -188,15 +202,12 @@ export class Replay {
    */
   private incrementTime(): void {
     this.setPlayTime(this.playTime.value + this.timeFrame);
-    if (this.player.heatMapByPlayTime) {
-      this.player.enableHeatMapByPlayTime();
-    }
   }
 
   /**
    * Replay all records
    * @param records
-   * @param silent
+   * @param silent do not animate?
    */
   replayRecords(records: EventRecord[], silent?: boolean): void {
     if (records) {
@@ -244,7 +255,7 @@ export class Replay {
    * @param silent
    * @private
    */
-  private replayMouseClick(eventRecord: MouseEventRecord, silent?: boolean): void {
+  private replayMouseClick(eventRecord: MouseEventRecord, silent?: boolean, heatmap?: boolean): void {
     const replay = this.replayMouseDefault(eventRecord);
     // create click effect
     if (!silent) {
@@ -347,6 +358,7 @@ export class Replay {
       const from = i;
       const to = i + 1;
       let activityFrame = null;
+      // tslint:disable-next-line:prefer-for-of
       for (let f = 0; f < frame.length; f++) {
         const event = frame[f];
         if (event instanceof KeyboardEventRecord) {

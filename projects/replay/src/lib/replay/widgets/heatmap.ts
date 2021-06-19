@@ -64,8 +64,8 @@ export class Heatmap {
   addData(x: number, y: number): void {
     const rect = this.element.getBoundingClientRect();
     this.heatmap.heatmap.addData({
-      x: Math.round(x * rect.width),
-      y: Math.round(y * rect.height)
+        x: Math.round(x * rect.width),
+        y: Math.round(y * rect.height)
     });
   }
 

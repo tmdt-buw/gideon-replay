@@ -28,8 +28,15 @@ export class AppComponent {
     this.trackedComponent = componentRef;
   }
 
+  getLabel(history: LocationHistory): string {
+    const url = location.pathname.split('/');
+    return url[url.length - 1];
+  }
+
   replay(history: LocationHistory) {
-    this.router.navigate([history.location.pathname]).then(() => {
+    const url = history.location.pathname.split('/');
+    const segment = url[url.length - 1];
+    this.router.navigate([segment]).then(() => {
       setTimeout(() => {
         this.isCollapsed = true;
         this.trackedComponent.reset();

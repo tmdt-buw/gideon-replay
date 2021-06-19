@@ -9,10 +9,6 @@ export class LocationHistory {
     this.location = location;
     this.events = new EventsRecord(element);
   }
-
-  get label(): string {
-    return this.location.pathname;
-  }
 }
 
 
