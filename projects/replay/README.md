@@ -10,11 +10,11 @@ Explore our example app here.
 
 Install the Gideon Replay library via
 
-```npm install @gideon/replay```
+```npm install @tmdt-buw/gd-replay```
 
 Include css styles into your own styles.css file
 
-```@import "@gideon/replay/src/lib/style/gideon.scss";```
+```@import "@tmdt-buw/gd-replay/lib/style/gideon.scss";```
 
 ## Track HTML-elements
 

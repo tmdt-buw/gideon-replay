@@ -15,8 +15,9 @@
   },
   "angularCompilerOptions": {
     "skipTemplateCodegen": true,
-    "strictMetadataEmit": true,
-    "enableResourceInlining": true
+    "strictMetadataEmit": false,
+    "enableResourceInlining": true,
+    "allowedNonPeerDependencies": true
   },
   "exclude": [
     "src/test.ts",

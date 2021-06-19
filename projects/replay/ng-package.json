@@ -1,6 +1,7 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/core",
+  "allowedNonPeerDependencies": ["lit", "@medv/finder"],
+  "dest": "../../dist/gd-replay",
   "lib": {
     "entryFile": "src/public-api.ts"
   }

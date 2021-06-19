@@ -1,12 +1,9 @@
 {
-  "name": "@tmdt-buw/gideon-replay",
+  "name": "@tmdt-buw/gd-replay",
   "version": "0.0.1",
   "license": "Apache-2.0",
   "repository": "https://github.com/tmdt-buw/gideon-replay.git",
   "homepage": "https://github.com/tmdt-buw/gideon-replay/README.md",
-  "scripts": {
-    "build": "tsc"
-  },
   "dependencies": {
     "lit": "^2.0.0-rc.2",
     "@medv/finder": "^2.0.0",
