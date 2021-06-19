@@ -47,22 +47,14 @@ export class AdvancedComponent extends TrackedComponent implements OnDestroy {
     },
     dataZoom: [
       {
+        id: 'zx',
         type: 'slider',
         xAxisIndex: 0,
         filterMode: 'empty'
       },
       {
+        id: 'zy',
         type: 'slider',
-        yAxisIndex: 0,
-        filterMode: 'empty'
-      },
-      {
-        type: 'inside',
-        xAxisIndex: 0,
-        filterMode: 'empty'
-      },
-      {
-        type: 'inside',
         yAxisIndex: 0,
         filterMode: 'empty'
       }
@@ -176,6 +168,18 @@ export class AdvancedComponent extends TrackedComponent implements OnDestroy {
       [-22.1, 40]
     ];
     chart.setOption({
+      dataZoom: [
+        {
+          id: 'zx',
+          start: 0,
+          end: 100
+        },
+        {
+          id: 'zy',
+          start: 0,
+          end: 100
+        }
+      ],
       series: [{
         id: 'a',
         data: this.data

@@ -104,6 +104,9 @@ export class BasicComponent extends TrackedComponent implements AfterViewInit {
       chart1.on('click', (params) => {
         this.updateChart(params.dataIndex).then();
       });
+      chart2.on('click', (params) => {
+        this.updateChart(params.dataIndex).then();
+      });
       this.updateChart().then();
     });
   }
@@ -114,13 +117,16 @@ export class BasicComponent extends TrackedComponent implements AfterViewInit {
    */
   async updateChart(selection?: number) {
     let chart1;
-    while (!chart1) {
+    let chart2;
+    while (!chart1 || !chart2) {
       const chartElement1 = document.getElementById('chart1');
       chart1 = getInstanceByDom(chartElement1);
+      const chartElement2 = document.getElementById('chart2');
+      chart2 = getInstanceByDom(chartElement2);
       await new Promise(r => setTimeout(r, 100));
     }
-    const data = [10, 52, 200, 334, 390, 330, 220].map((value, index) => {
-      if (selection && selection === index) {
+    const data1 = [10, 52, 200, 334, 390, 330, 220].map((value, index) => {
+      if (selection !== undefined && selection === index) {
         return {
           value,
           itemStyle: {
@@ -139,7 +145,31 @@ export class BasicComponent extends TrackedComponent implements AfterViewInit {
           name: 'Counters',
           type: 'bar',
           barWidth: '60%',
-          data
+          data: data1
+        }
+      ]
+    });
+    const data2 = [23, 34, 175, 275, 355, 300, 215].map((value, index) => {
+      if (selection !== undefined && selection === index) {
+        return {
+          value,
+          itemStyle: {
+            color: '#a90000'
+          }
+        };
+      } else {
+        return {
+          value
+        };
+      }
+    });
+    chart2.setOption({
+      series: [
+        {
+          name: 'Counters',
+          type: 'bar',
+          barWidth: '60%',
+          data: data2
         }
       ]
     });

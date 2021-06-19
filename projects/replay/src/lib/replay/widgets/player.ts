@@ -255,37 +255,27 @@ export class Player extends LitElement {
       align-items: center;
     }
 
-    .marks .keyboard {
+    .marks div {
+      pointer-events: none;
       position: absolute;
       top: 0;
       opacity: 0.5;
-      background: blueviolet;
       border-radius: 5px;
       height: 3px;
       width: 1%;
       z-index: 2;
+    }
+
+    .marks .keyboard {
+      background: blueviolet;
     }
 
     .marks .active {
-      position: absolute;
-      top: 0;
-      opacity: 0.5;
       background: orange;
-      border-radius: 5px;
-      height: 3px;
-      width: 1%;
-      z-index: 2;
     }
 
     .marks .interact {
-      position: absolute;
-      top: 0;
-      opacity: 0.5;
       background: green;
-      border-radius: 5px;
-      height: 3px;
-      width: 1%;
-      z-index: 2;
     }
 
     .video-progress:hover .marks div {

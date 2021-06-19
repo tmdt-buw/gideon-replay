@@ -31,6 +31,7 @@ export class AppComponent {
   replay(history: LocationHistory) {
     this.router.navigate([history.location.pathname]).then(() => {
       setTimeout(() => {
+        this.isCollapsed = true;
         this.trackedComponent.reset();
         this.gideon.replay(this.trackedComponent.container.nativeElement, history, () => this.trackedComponent.reset());
       });

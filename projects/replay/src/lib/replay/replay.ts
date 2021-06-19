@@ -68,7 +68,7 @@ export class Replay {
    */
   showHeatmap(type?: MouseEventType, time?: number): void {
     this.heatmap?.remove();
-    const completeHistory = this.history.events.mouseEvents;
+    const completeHistory = this.history.events.historyByTimeframe(10).map(frame => frame.filter(event => event instanceof MouseEventRecord)[0]).filter(el => !!el) as MouseEventRecord[];
     const timeToGlobal = time + this.history.events.initialized;
     const historyToTime = time ? completeHistory.filter(event => event.time < timeToGlobal) : completeHistory;
     this.heatmap = new Heatmap(this.element, historyToTime, type);
@@ -153,11 +153,11 @@ export class Replay {
         if (this.resetElement) {
           this.resetElement();
           // wait for animations etc
-          await this.delay(500);
+          await this.delay(100);
         }
         for (let i = 0; i < idx; i++) {
           const records = this.historyByTimeFrame[i].filter(evt => evt.type !== 'mousemove');
-          this.replayRecords(records);
+          this.replayRecords(records, true);
         }
       } else {
         this.replayRecords(frame);
@@ -196,11 +196,12 @@ export class Replay {
   /**
    * Replay all records
    * @param records
+   * @param silent
    */
-  replayRecords(records: EventRecord[]): void {
+  replayRecords(records: EventRecord[], silent?: boolean): void {
     if (records) {
       records.forEach(record => {
-        this.replayEvent(record);
+        this.replayEvent(record, silent);
       });
     }
   }
@@ -208,9 +209,10 @@ export class Replay {
   /**
    * Replay event record
    * @param record
+   * @param silent
    * @private
    */
-  private replayEvent(record: EventRecord): void {
+  private replayEvent(record: EventRecord, silent?: boolean): void {
     if (record instanceof KeyboardEventRecord) {
       this.replayKeyboardEvent(record);
     }
@@ -221,7 +223,7 @@ export class Replay {
       switch (record.type) {
         case 'click':
         case 'dblclick': {
-          this.replayMouseClick(record);
+          this.replayMouseClick(record, silent);
           break;
         }
         case 'mouseleave': {
@@ -239,17 +241,20 @@ export class Replay {
   /**
    * Show click animation and replay default
    * @param eventRecord
+   * @param silent
    * @private
    */
-  private replayMouseClick(eventRecord: MouseEventRecord): void {
+  private replayMouseClick(eventRecord: MouseEventRecord, silent?: boolean): void {
     const replay = this.replayMouseDefault(eventRecord);
     // create click effect
-    const clickEffect = document.createElement('div');
-    clickEffect.className = 'clickEffect';
-    clickEffect.style.left = replay.x + 'px';
-    clickEffect.style.top = replay.y + 'px';
-    document.body.appendChild(clickEffect);
-    clickEffect.addEventListener('animationend', () => clickEffect.parentElement.removeChild(clickEffect));
+    if (!silent) {
+      const clickEffect = document.createElement('div');
+      clickEffect.className = 'clickEffect';
+      clickEffect.style.left = replay.x + 'px';
+      clickEffect.style.top = replay.y + 'px';
+      document.body.appendChild(clickEffect);
+      clickEffect.addEventListener('animationend', () => clickEffect.parentElement.removeChild(clickEffect));
+    }
   }
 
   /**
@@ -302,7 +307,7 @@ export class Replay {
    * @private
    */
   private delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   /**
