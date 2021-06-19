@@ -1,0 +1,11 @@
+<div #container>
+  <div fxLayout="column" fxLayoutAlign="center center" class="header">
+    <h4 nz-typography>Basic Example</h4>
+    <h5 nz-typography nzType="secondary">Hover data</h5>
+  </div>
+  <div fxLayout="row" class="chart">
+    <div fxFlex id="chart1" echarts [options]="options1"></div>
+    <div fxFlex id="chart2" echarts [options]="options2"></div>
+  </div>
+</div>
+

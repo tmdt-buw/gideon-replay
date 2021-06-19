@@ -1,0 +1,38 @@
+<nz-layout fxFill>
+  <nz-header fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="30px">
+    <span class="logo">
+      GIDEON Replay
+    </span>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item [routerLink]="routes.BASIC" nzMatchRouter>Basic Chart</li>
+      <li nz-menu-item [routerLink]="routes.ADVANCED" nzMatchRouter>Advanced Chart</li>
+    </ul>
+    <div class="logo">
+      <span>History</span>
+      <i class="trigger" nz-icon [nzType]="isCollapsed ? 'menu-fold' : 'menu-unfold'" (click)="isCollapsed = !isCollapsed"></i>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-content>
+      <div class="container">
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+      </div>
+    </nz-content>
+    <nz-sider nzCollapsible [nzCollapsedWidth]="0" nzTheme="light" [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+      <div class="sider" fxLayout="column">
+        <h3>
+          History
+        </h3>
+        <div fxLayout="column">
+          <ng-container *ngFor="let record of gideon.getHistoryRecords(); let i = index">
+            <button (click)="replay(record)" nz-button nzType="dashed">{{ record.label }}</button>
+            <div class="timeline" *ngIf="i < gideon.getHistoryRecords().length - 1">
+              &nbsp;
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </nz-sider>
+  </nz-layout>
+  <nz-footer>GIDEON ©2021 By TMDT <nz-alert *ngIf="!tested" nzType="warning" nzMessage="Application is only tested for Chrome and Firefox." nzShowIcon></nz-alert></nz-footer>
+</nz-layout>
