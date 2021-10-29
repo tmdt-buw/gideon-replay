@@ -12,5 +12,6 @@
     "lit": "^2.0.0-rc.2",
     "@medv/finder": "^2.0.0",
     "tslib": "^2.0.0"
-  }
+  },
+  "bundledDependencies": ["heatmap.js","lit", "@medv/finder"]
 }

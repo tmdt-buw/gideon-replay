@@ -1,3 +1,5 @@
+export type MouseEventType = 'click' | 'mousemove';
+
 export class MouseEventRecord {
   time: number;
   x: number;
