@@ -19,7 +19,7 @@ Install the Gideon Replay library via
 
 Include css styles into your own styles.css file
 
-```@import "@tmdt-buw/gideon-replay/lib/style/gideon.scss";```
+```@import "../node_modules/@tmdt-buw/gideon-replay/style/gideon.scss";```
 
 ## Track HTML-elements
 
