@@ -1,6 +1,6 @@
 # Gideon Replay
 
-![alt text](img/overview.png)
+![alt text](https://github.com/tmdt-buw/gideon-replay/blob/master/img/overview.png)
 
 Gideon replay is a publicly freely available library that can be integrated into any web application with just a few lines of code to record and replay user interactions such as mouse clicks and keystrokes. Replay can be controlled via a web player interface. This interface shows activity types and idle times as well as an attention heat map. In addition, we enable the export of all interactions for a later analysis. In summary, Gideon provides free, easy tracking of user interactions and significantly reduces the effort required for specified and customized tracking solutions.
 
@@ -15,13 +15,17 @@ By using a frontend framework, a developer can implement an abstract _TrackedCom
 
 Install the Gideon Replay library via
 
-```npm install @tmdt-buw/gd-replay```
+```npm install @tmdt-buw/gideon-replay```
 
 Include css styles into your own styles.css file
 
-```@import "@tmdt-buw/gd-replay/lib/style/gideon.scss";```
+```@import "@tmdt-buw/gideon-replay/lib/style/gideon.scss";```
 
 ## Track HTML-elements
+
+Tracking an element also tracks all interactions performed on child elements inside the element,
+i.e. if you want to track a chart element containing several svg elements you only register the chart container.
+Register only the body element if your want to track the whole application.
 
 Tracking user interactions on a component is just one line of code:
 
@@ -56,3 +60,45 @@ Export complete history:
 Export specific element history:
 
 ```Gideon.getInstance().export(history);```
+
+### Data Format
+
+The export contains a list of histories (one per tracked element) in JSON-format. The histories, in turn, include a list of tracked mouse, wheel and keyboard events which are a reduced version of the common browser events.
+Element always contains the css selector to the triggering element.
+
+Mouse event format. Type is one of the [browser mouse event types](https://www.w3schools.com/jsref/obj_mouseevent.asp).
+```
+{
+  time: number;
+  x: number;
+  y: number;
+  type: string;
+  element: string;
+}
+```
+
+Wheel event format. Type is one of the [browser wheel event types](https://www.w3schools.com/jsref/obj_wheelevent.asp).
+```
+{
+  time: number;
+  type: string;
+  event: {
+    deltaX: number;
+    deltaY: number;
+    deltaZ: number;
+    deltaMode: number;
+  };
+  element: string;
+}
+```
+
+Mouse event format. Type is one of the [browser keyboard event types](https://www.w3schools.com/jsref/obj_keyboardevent.asp).
+```
+{
+  time: number;
+  x: number;
+  y: number;
+  type: string;
+  element: string;
+}
+```

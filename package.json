@@ -1,6 +1,6 @@
 {
   "name": "gideon-replay-demo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "Apache-2.0",
   "repository": "https://github.com/tmdt-buw/gideon-replay.git",
   "scripts": {
@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "~11.2.4",
     "@angular/router": "~11.2.4",
     "echarts": "^5.1.1",
-    "heatmap.js": "^2.0.5",
     "ng-zorro-antd": "^11.4.0",
     "ngx-echarts": "^6.0.1",
     "rxjs": "~6.6.0",
