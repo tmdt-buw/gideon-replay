@@ -4,6 +4,22 @@
 
 Gideon replay is a publicly freely available library that can be integrated into any web application with just a few lines of code to record and replay user interactions such as mouse clicks and keystrokes. Replay can be controlled via a web player interface. This interface shows activity types and idle times as well as an attention heat map. In addition, we enable the export of all interactions for a later analysis. In summary, Gideon provides free, easy tracking of user interactions and significantly reduces the effort required for specified and customized tracking solutions.
 
+Cite as
+
+```
+@article{LANGER2022100964,
+  title = {Gideon Replay: A library to replay interactions in web-applications},
+  journal = {SoftwareX},
+  volume = {17},
+  pages = {100964},
+  year = {2022},
+  issn = {2352-7110},
+  doi = {https://doi.org/10.1016/j.softx.2021.100964},
+  url = {https://www.sciencedirect.com/science/article/pii/S2352711021001862},
+  author = {Tristan Langer and Richard Meyes and Tobias Meisen}
+}
+```
+
 ## Example
 
 Explore our example app [here](https://tmdt-buw.github.io/gideon-replay/).
