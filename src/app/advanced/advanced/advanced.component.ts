@@ -1,6 +1,5 @@
 import {Component, ElementRef, OnDestroy, ViewChild} from '@angular/core';
 import {getInstanceByDom} from 'echarts';
-import ResizeObserver from 'resize-observer-polyfill';
 import {TrackedComponent} from '../../../../projects/replay/src/examples/angular/tracked.component';
 import {Gideon} from '../../../../projects/replay/src/lib/gideon';
 
@@ -13,6 +12,8 @@ import {Gideon} from '../../../../projects/replay/src/lib/gideon';
 export class AdvancedComponent extends TrackedComponent implements OnDestroy {
 
   @ViewChild('container') container: ElementRef;
+
+  initOptions = {renderer: 'svg'};
 
   symbolSize = 20;
   data = [
@@ -68,7 +69,14 @@ export class AdvancedComponent extends TrackedComponent implements OnDestroy {
         data: this.data,
         animation: false
       }
-    ]
+    ],
+    toolbox: {
+      feature: {
+        saveAsImage: {
+          backgroundColor: 'white'
+        }
+      }
+    }
   };
 
   constructor() {

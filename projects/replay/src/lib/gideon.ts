@@ -1,5 +1,6 @@
 import {LocationHistory} from './record/location-history';
 import {Replay} from './replay/replay';
+import {stringify} from './util';
 
 export class Gideon {
 
@@ -63,13 +64,12 @@ export class Gideon {
    * @param index
    */
   exportHistory(index?: number) {
-    let history;
+    let history = this.getHistoryRecords();
     if (index) {
-      history = this._history[index];
+      this.downloadJson(history[index]);
     } else {
-      history = this._history;
+      this.downloadJson(history);
     }
-    this.downloadJson(history);
   }
 
   /**
@@ -114,7 +114,7 @@ export class Gideon {
    * @private
    */
   private downloadJson(json: any) {
-    const jsonString = JSON.stringify(json);
+    const jsonString = stringify(json);
     const element = document.createElement('a');
     element.setAttribute('href', 'data:text/json;charset=UTF-8,' + encodeURIComponent(jsonString));
     element.setAttribute('download', 'history.json');

@@ -14,6 +14,8 @@ export class BasicComponent extends TrackedComponent implements AfterViewInit {
     super(Gideon.getInstance());
   }
 
+  initOptions = {renderer: 'svg'};
+
   options1 = {
     color: ['#3398DB'],
     tooltip: {
@@ -87,7 +89,12 @@ export class BasicComponent extends TrackedComponent implements AfterViewInit {
         barWidth: '60%',
         data: [23, 34, 175, 275, 355, 300, 215]
       }
-    ]
+    ],
+    toolbox: {
+      feature: {
+        saveAsImage: {}
+      }
+    }
   };
 
   /**

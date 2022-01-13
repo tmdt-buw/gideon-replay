@@ -1,4 +1,3 @@
-import ResizeObserver from 'resize-observer-polyfill';
 import {BehaviorSubject} from 'rxjs';
 import {Gideon} from '../gideon';
 import {LocationHistory} from '../record/location-history';

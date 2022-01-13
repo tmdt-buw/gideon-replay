@@ -6,11 +6,9 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
 import {en_US, NZ_I18N} from 'ng-zorro-antd/i18n';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {AdvancedModule} from './advanced/advanced.module';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BasicModule} from './basic/basic.module';

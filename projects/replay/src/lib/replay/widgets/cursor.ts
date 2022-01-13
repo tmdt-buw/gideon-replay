@@ -1,7 +1,6 @@
 import {css, html, LitElement} from 'lit';
-import {styleMap} from 'lit-html/directives/style-map';
-import {customElement} from 'lit/decorators';
-import {property} from 'lit/decorators.js';
+import {styleMap} from 'lit-html/directives/style-map.js';
+import {property, customElement} from 'lit/decorators.js';
 
 @customElement('gd-mouse')
 export class Cursor extends LitElement {

@@ -1,6 +1,6 @@
 {
   "name": "@tmdt-buw/gideon-replay",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "license": "Apache-2.0",
   "repository": "https://github.com/tmdt-buw/gideon-replay.git",
   "homepage": "https://github.com/tmdt-buw/gideon-replay/README.md",
@@ -8,10 +8,9 @@
     "registry":"https://registry.npmjs.org/"
   },
   "dependencies": {
-    "heatmap.js": "^2.0.5",
-    "lit": "^2.0.0-rc.2",
     "@medv/finder": "^2.0.0",
+    "heatmap.js": "^2.0.5",
+    "lit": "^2.1.1",
     "tslib": "^2.0.0"
-  },
-  "bundledDependencies": ["heatmap.js","lit", "@medv/finder"]
+  }
 }

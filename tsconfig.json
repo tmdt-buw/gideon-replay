@@ -7,13 +7,9 @@
     "sourceMap": true,
     "declaration": false,
     "paths": {
-      "@gideon/angular": [
-        "dist/angular/angular",
-        "dist/angular"
-      ],
-      "@gideon/core": [
-        "dist/core/core",
-        "dist/core"
+      "@tmdt-buw/gideon-replay": [
+        "dist/gideon-replay/gideon-replay",
+        "dist/gideon-replay"
       ]
     },
     "downlevelIteration": true,
@@ -25,7 +21,8 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

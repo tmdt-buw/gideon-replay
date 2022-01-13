@@ -1,8 +1,7 @@
 import {Platform} from '@angular/cdk/platform';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {Gideon} from '../../projects/replay/src/lib/gideon';
-import {LocationHistory} from '../../projects/replay/src/lib/record/location-history';
+import {Gideon, LocationHistory} from '@tmdt-buw/gideon-replay';
 import {appRoutingNames} from './app-routing.names';
 
 @Component({
@@ -24,7 +23,7 @@ export class AppComponent {
     this.tested = platform.BLINK || platform.FIREFOX;
   }
 
-  onActivate(componentRef: any) {
+  onActivate(componentRef: any): void  {
     this.trackedComponent = componentRef;
   }
 
@@ -33,7 +32,7 @@ export class AppComponent {
     return url[url.length - 1];
   }
 
-  replay(history: LocationHistory) {
+  replay(history: LocationHistory): void  {
     const url = history.location.pathname.split('/');
     const segment = url[url.length - 1];
     this.router.navigate([segment]).then(() => {
