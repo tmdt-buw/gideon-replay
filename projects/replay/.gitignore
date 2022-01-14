@@ -8,7 +8,7 @@ dist
 /bazel-out
 
 # dependencies
-/node_modules
+node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -16,7 +16,6 @@ speed-measure-plugin*.json
 
 # IDEs and editors
 /.idea
-.angular
 .project
 .classpath
 .c9/

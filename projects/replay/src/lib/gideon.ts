@@ -44,10 +44,11 @@ export class Gideon {
    * @param element
    * @param history
    * @param reset
+   * @param heatmapConfig
    */
-  replay(element: any, history: LocationHistory, reset?: () => void) {
+  replay(element: any, history: LocationHistory, reset?: () => void, heatmapConfig?: any) {
     this.stopReplay();
-    this._replay = new Replay(this, element, history, reset);
+    this._replay = new Replay(this, element, history, reset, heatmapConfig);
     this.setRecording(false);
   }
 

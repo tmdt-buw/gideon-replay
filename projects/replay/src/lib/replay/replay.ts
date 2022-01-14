@@ -5,6 +5,7 @@ import {EventRecord} from '../record/model/events-record';
 import {KeyboardEventRecord} from '../record/model/keyboard-event-record';
 import {MouseEventRecord, MouseEventType} from '../record/model/mouse-event-record';
 import {WheelEventRecord} from '../record/model/wheel-event-record';
+import {defaultHeatmapConfig} from './widgets/config/default-heatmap-config';
 import {Cursor} from './widgets/cursor';
 import {Heatmap} from './widgets/heatmap';
 import {Player} from './widgets/player';
@@ -21,6 +22,7 @@ export class Replay {
   private readonly player: Player;
   private readonly cursor;
   private heatmap: Heatmap;
+  private readonly heatmapConfig: any;
 
   timer: any;
   playTime = new BehaviorSubject(0);
@@ -31,11 +33,12 @@ export class Replay {
     return this.history.events;
   }
 
-  constructor(gideon: Gideon, element: any, history: LocationHistory, resetElement?: () => void) {
+  constructor(gideon: Gideon, element: any, history: LocationHistory, resetElement?: () => void, heatmapConfig?: any) {
     this.gideon = gideon;
     this.element = element;
     this.history = history;
     this.resetElement = resetElement;
+    this.heatmapConfig = heatmapConfig;
     this.historyByTimeFrame = this.history.events.historyByTimeframe(this.timeFrame);
     this.player = new Player(this);
     document.body.appendChild(this.player);
@@ -70,7 +73,7 @@ export class Replay {
     const completeHistory = this.history.events.historyByTimeframe(10).map(frame => frame.filter(event => event instanceof MouseEventRecord)[0]).filter(el => !!el) as MouseEventRecord[];
     const timeToGlobal = time + this.history.events.initialized;
     const historyToTime = time ? completeHistory.filter(event => event.time < timeToGlobal) : completeHistory;
-    this.heatmap = new Heatmap(this.element, historyToTime, type);
+    this.heatmap = new Heatmap(this.element, historyToTime, type, this.heatmapConfig);
   }
 
   /**

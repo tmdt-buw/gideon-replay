@@ -112,11 +112,24 @@ Retrieve the complete history of interactions on all elements:
 
 Replay a history record on an HTML-element:
 
-```Gideon.getInstance().getHistoryRecords(htmlElement, historyRecord);```
+```Gideon.getInstance().replay(htmlElement, historyRecord);```
 
 Replay a history record on a stateful HTML-element with reset function to reset view:
 
-```Gideon.getInstance().getHistoryRecords(htmlElement, historyRecord, () => reset());```
+```Gideon.getInstance().replay(htmlElement, historyRecord, () => reset());```
+
+Replay a history record on a stateful HTML-element with reset function to reset view and [custom heatmap config](https://www.patrick-wied.at/static/heatmapjs/docs.html):
+
+```
+const config = {
+  radius: 10,
+  maxOpacity: .5,
+  minOpacity: 0,
+  blur: .75
+}
+
+Gideon.getInstance().replay(htmlElement, historyRecord, () => reset(), config);
+```
 
 Stop current replay:
 

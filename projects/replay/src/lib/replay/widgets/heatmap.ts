@@ -1,5 +1,6 @@
-import * as h337 from 'heatmap.js';
+import * as h337 from '@rengr/heatmap.js';
 import {MouseEventRecord, MouseEventType} from '../../record/model/mouse-event-record';
+import {defaultHeatmapConfig} from './config/default-heatmap-config';
 
 
 export class Heatmap {
@@ -8,10 +9,12 @@ export class Heatmap {
 
   private element: any;
   private heatmap: any;
+  private readonly config: any;
 
-  constructor(element: any, events: MouseEventRecord[], type?: MouseEventType) {
+  constructor(element: any, events: MouseEventRecord[], type?: MouseEventType, config?: any) {
     this.element = element;
     this.type = type;
+    this.config = config || defaultHeatmapConfig;
     this.createMouseMoveHeatmap(events, type);
   }
 
@@ -39,10 +42,9 @@ export class Heatmap {
     this.element.appendChild(heatmap);
     this.heatmap = {
       container: heatmap,
-      heatmap: h337.create({
-        container: heatmap,
-        radius: 5
-      })
+      heatmap: h337.create(Object.assign({
+        container: heatmap
+      }, this.config))
     };
     heatmap.style.position = 'absolute';
     const data = events.map(event => {
